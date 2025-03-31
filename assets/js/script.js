@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	for (let button of buttons) {
 		button.addEventListener("click", function () {
 			if (this.getAttribute("data-type") === "submit") {
-				alert("You clicked submit!");
+				checkAnswer();
 			} else {
 				let gameType = this.getAttribute("data-type");
 				runGame(gameType);
@@ -35,7 +35,23 @@ function runGame(gameType) {
 	}
 }
 
+/**
+ * Checks the user answer agaianst the first item in the array returned by calculateCorrectAnswer
+ */
 function checkAnswer() {
+	let userAnswer = parseInt(document.getElementById("answer-box").value);
+	let calculateAnswer = calculateCorrectAnswer();
+	let isCorrect = userAnswer === calculateAnswer[0];
+
+	if (isCorrect) {
+		alert("Correct!");
+		incrementScore();
+	} else {
+		alert(`Wrong! The correct answer is ${calculateAnswer[0]}`);
+		incrementWrongAnswer();
+	}
+
+	runGame(calculateAnswer[1]);
 
 }
 
@@ -44,6 +60,7 @@ function checkAnswer() {
  * Checks the answer against the value in the user's answer box for correctness
  */
 function calculateCorrectAnswer() {
+	document.getElementById("answer-box").value = "";
 	let operand1 = parseInt(document.getElementById("operand1").textContent);
 	let operand2 = parseInt(document.getElementById("operand2").textContent);
 	let operator = document.getElementById("operator").textContent;
@@ -56,29 +73,30 @@ function calculateCorrectAnswer() {
 		alert(`Unknown operator: ${operator}`);
 		throw `Unknown operator: ${operator}. Aborting!`;
 	}
+}
 
-	function incrementScore() {
+function incrementScore() {
 
-	}
+}
 
-	function incrementWrongAnswer() {
+function incrementWrongAnswer() {
 
-	}
+}
 
-	function displayAdditionQuestion(operand1, operand2) {
-		document.getElementById("operand1").textContent = operand1;
-		document.getElementById("operand2").textContent = operand2;
-		document.getElementById("operator").textContent = "+";
-	}
+function displayAdditionQuestion(operand1, operand2) {
+	document.getElementById("operand1").textContent = operand1;
+	document.getElementById("operand2").textContent = operand2;
+	document.getElementById("operator").textContent = "+";
+}
 
-	function displaySubtractQuestion() {
+function displaySubtractQuestion() {
 
-	}
+}
 
-	function displayMultiplyQuestion() {
+function displayMultiplyQuestion() {
 
-	}
+}
 
-	function displayDivisionQuestion() {
+function displayDivisionQuestion() {
 
-	}
+}
