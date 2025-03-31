@@ -14,6 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		})
 	}
+	document.getElementById("answer-box").addEventListener("keydown", function (event) {
+		if (event.key === "Enter") {
+			checkAnswer();
+		}
+	})
+
+
 
 	runGame("addition");
 })
@@ -22,6 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
  * The main game loop, which will run when the game starts
  */
 function runGame(gameType) {
+	document.getElementById("answer-box").value = "";
+	document.getElementById("answer-box").focus();
+
 
 	// The random numbers should be between 1 and 25
 	let num1 = Math.floor(Math.random() * 25) + 1;
@@ -66,7 +76,6 @@ function checkAnswer() {
  * Checks the answer against the value in the user's answer box for correctness
  */
 function calculateCorrectAnswer() {
-	document.getElementById("answer-box").value = "";
 	let operand1 = parseInt(document.getElementById("operand1").textContent);
 	let operand2 = parseInt(document.getElementById("operand2").textContent);
 	let operator = document.getElementById("operator").textContent;
