@@ -35,7 +35,7 @@ function runGame(gameType) {
 
 	// The random numbers should be between 1 and 25
 	let num1 = Math.floor(Math.random() * 25) + 1;
-	let num2 = Math.floor(Math.random() * 25) + 1;
+	let num2 = Math.floor(Math.pow(Math.random(), num1) * 25) + 1;
 
 
 	if (gameType === "addition") {
